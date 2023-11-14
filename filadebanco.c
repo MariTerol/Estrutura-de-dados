@@ -112,7 +112,7 @@ void ordenarServicosPorValor() {
 
 void ordenarClientesPorNome() {
     for (int i = 0; i < numClientes - 1; i++) {
-        for (int j = 0; i < numClientes - i - 1; j++) {
+        for (int j = 0; j < numClientes - i - 1; j++) {
             if (strcmp(clientes[j].nome, clientes[j + 1].nome) > 0) {
                 struct Consumidor temp = clientes[j];
                 clientes[j] = clientes[j + 1];
@@ -131,17 +131,17 @@ void adicionarServico() {
     if (numServicos < MAX_SERVICOS) {
         struct Servico novoServico;
         printf("Descrição do serviço: ");
-        scanf("%s", novoServico.descricao);
+        scanf(" %[^\n]s", novoServico.descricao);
         printf("Tipo do serviço: ");
-        scanf("%s", novoServico.tipo);
+        scanf(" %[^\n]s", novoServico.tipo);
         printf("Consumidor: ");
-        scanf("%s", novoServico.consumidor);
+        scanf(" %[^\n]s", novoServico.consumidor);
         printf("Valor do serviço: ");
         scanf("%f", &novoServico.valor);
         printf("Parâmetros do serviço: ");
-        scanf("%s", novoServico.parametros);
+        scanf(" %[^\n]s", novoServico.parametros);
         printf("Prestador do serviço: ");
-        scanf("%s", novoServico.prestador);
+        scanf(" %[^\n]s", novoServico.prestador);
 
         servicos[numServicos] = novoServico;
         numServicos++;
@@ -155,15 +155,15 @@ void adicionarPrestador() {
     if (numPrestadores < MAX_PRESTADORES) {
         struct Prestador novoPrestador;
         printf("Nome do prestador: ");
-        scanf("%s", novoPrestador.nome);
+        scanf(" %[^\n]s", novoPrestador.nome);
         printf("Email do prestador: ");
-        scanf("%s", novoPrestador.email);
+        scanf(" %[^\n]s", novoPrestador.email);
         printf("Telefone do prestador: ");
-        scanf("%s", novoPrestador.telefone);
+        scanf(" %[^\n]s", novoPrestador.telefone);
         printf("Endereço do prestador: ");
-        scanf("%s", novoPrestador.endereco);
+        scanf(" %[^\n]s", novoPrestador.endereco);
         printf("UF do prestador: ");
-        scanf("%s", novoPrestador.uf);
+        scanf(" %[^\n]s", novoPrestador.uf);
 
         prestadores[numPrestadores] = novoPrestador;
         numPrestadores++;
@@ -177,17 +177,17 @@ void adicionarConsumidor() {
     if (numClientes < MAX_CLIENTES) {
         struct Consumidor novoConsumidor;
         printf("Nome do consumidor: ");
-        scanf("%s", novoConsumidor.nome);
+        scanf(" %[^\n]s", novoConsumidor.nome);
         printf("Idade do consumidor: ");
         scanf("%d", &novoConsumidor.idade);
         printf("Email do consumidor: ");
-        scanf("%s", novoConsumidor.email);
+        scanf(" %[^\n]s", novoConsumidor.email);
         printf("Telefone do consumidor: ");
-        scanf("%s", novoConsumidor.telefone);
+        scanf(" %[^\n]s", novoConsumidor.telefone);
         printf("Endereço do consumidor: ");
-        scanf("%s", novoConsumidor.endereco);
+        scanf(" %[^\n]s", novoConsumidor.endereco);
         printf("UF do consumidor: ");
-        scanf("%s", novoConsumidor.uf);
+        scanf(" %[^\n]s", novoConsumidor.uf);
 
         clientes[numClientes] = novoConsumidor;
         numClientes++;
@@ -218,11 +218,10 @@ int main() {
         printf("6. Apresentar o(s) estado(s) onde está registrado o serviço mais caro\n");
         printf("7. Listar todos os serviços em ordem crescente de valor\n");
         printf("8. Listar todos os clientes em ordem crescente de nome\n");
-        printf("9. Sair\n");
-        printf("10. Adicionar um novo serviço\n");
-        printf("11. Listar todos os serviços\n");
-        printf("12. Adicionar um novo prestador\n");
-        printf("13. Adicionar um novo consumidor\n");
+        printf("9. Adicionar um novo consumidor\n");
+        printf("10. Adicionar um novo servico\n");
+        printf("11. Adicionar um novo prestador\n");
+        printf("12. Sair\n");
         printf("Escolha a opção: ");
         scanf("%d", &escolha);
 
@@ -239,13 +238,13 @@ int main() {
             case 4:
                 char uf[3];
                 printf("Digite o estado: ");
-                scanf("%s", uf);
+                scanf(" %[^\n]s", uf);
                 listarClientesPorEstado(uf);
                 break;
             case 5:
                 char tipo[50];
                 printf("Digite o tipo de serviço: ");
-                scanf("%s", tipo);
+                scanf(" %[^\n]s", tipo);
                 listarPrestadoresPorTipo(tipo);
                 break;
             case 6:
@@ -258,24 +257,21 @@ int main() {
                 ordenarClientesPorNome();
                 break;
             case 9:
-                printf("Saindo do programa.\n");
+                adicionarConsumidor();
                 break;
             case 10:
                 adicionarServico();
                 break;
             case 11:
-                listarServicos();
-                break;
-            case 12:
                 adicionarPrestador();
                 break;
-            case 13:
-                adicionarConsumidor();
+            case 12:
+                printf("Saindo do programa.\n");
                 break;
             default:
                 printf("Opção inválida. Tente novamente.\n");
         }
-    } while (escolha != 9);
+    } while (escolha != 12);
 
     return 0;
 }
